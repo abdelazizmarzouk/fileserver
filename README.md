@@ -88,14 +88,14 @@ The properties util class loads the application configuration properties.
 
 Exceptions are implemented in the application not to break the main thread. 
 Two custom exceptions were added one is called **InternalServerException** which is raised
-whenever is completely not able to handle exceptions. 
+whenever the server is completely not able to handle exceptions. 
 The other is **RequestParsingException** which is a custom exception that is raised when there is 
 a formatting miss match.
-The exceptions are thrown up to from the sources so that the socket is closed safely and avoid having blocked threads.
+The exceptions are thrown up from the sources so that the socket connections are closed safely and avoid having blocked threads.
 
 ## Socket Timeout
 
-Sockets are adjusted to timeout after ten seconds to avoid problems that could happen due to network problems.
+Sockets are adjusted to timeout after ten seconds to avoid problems that could happen due to network.
 
 ## application.properties
 
