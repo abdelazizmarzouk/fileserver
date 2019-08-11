@@ -61,9 +61,13 @@ public class HTTPRequestHandler implements Runnable {
             LOGGER.warn(ERROR_IN_HTTP_REQUEST_URL_ENCODING.formatMessage());
             throw e;
         }
-        String method = httpRequest.getMethod();
-        RequestHandler handler = createSuitableRequestHandler(method, outputStream);
-        handler.handleRequest(httpRequest);
+        if (httpRequest != null) {
+            String method = httpRequest.getMethod();
+            RequestHandler handler = createSuitableRequestHandler(method, outputStream);
+            handler.handleRequest(httpRequest);
+        } else {
+            closeSocket();
+        }
     }
 
     /**
