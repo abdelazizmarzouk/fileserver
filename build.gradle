@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'com.marshmelo'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'File Server',
+                'Implementation-Version': version,
+                'Main-Class': 'com.marshmelo.fileserver.FileServer'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('commons-io:commons-io:2.6')
+    compile("log4j:log4j:1.2.17")
+    testCompile("junit:junit:4.12")
+}
