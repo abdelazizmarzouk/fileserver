@@ -2,8 +2,9 @@ package com.marshmelo.fileserver.handler;
 
 import com.marshmelo.fileserver.exceptions.InternalServerException;
 import com.marshmelo.fileserver.exceptions.RequestParsingException;
-import com.marshmelo.fileserver.model.HttpRequest;
-import com.marshmelo.fileserver.utils.HttpRequestParser;
+import com.marshmelo.fileserver.handlers.GetRequestHandler;
+import com.marshmelo.fileserver.handlers.HttpRequestParser;
+import com.marshmelo.fileserver.models.HttpRequest;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 

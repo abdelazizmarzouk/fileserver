@@ -1,7 +1,7 @@
-package com.marshmelo.fileserver.utils;
+package com.marshmelo.fileserver.handlers;
 
-import com.marshmelo.fileserver.model.HttpResponse;
-import com.marshmelo.fileserver.model.Resource;
+import com.marshmelo.fileserver.models.HttpResponse;
+import com.marshmelo.fileserver.models.Resource;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

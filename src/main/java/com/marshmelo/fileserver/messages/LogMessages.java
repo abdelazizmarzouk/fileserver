@@ -11,7 +11,7 @@ public enum LogMessages {
     ERROR_GETTING_INPUT_STREAM("Error getting input stream from connection."),
     ERROR_GETTING_OUTPUT_STREAM("Error getting output stream from connection."),
     ERROR_SETTING_SOCKET_TIMEOUT("Failed to set timeout."),
-    ERROR_FINDING_CONTENT_TYPE("Error while finding the content type for the file with the path %s and the default path text/html will be set."),
+    ERROR_FINDING_CONTENT_TYPE("Error while finding the content type for the file with the path %s and the default path application/octet-stream will be set."),
     ERROR_READING_FILE("Error reading file %s."),
     ERROR_FILE_NOT_FOUND("File %s was not found."),
     ERROR_CLOSING_SOCKET_CONNECTION("Error closing socket connection."),
@@ -29,6 +29,8 @@ public enum LogMessages {
     ERROR_HEADER_SHOULD_END_WITH_BLANK_LINE("Header is not ended with a blank line."),
     ERROR_GETTING_APPLICATION_PROPERTIES("An error occurred while getting application properties, the application will run with the default configurations."),
     ERROR_LOADING_APPLICATION_PROPERTIES("An error occurred while loading application properties, the application will run with the default configurations."),
+    ERROR_PARSING_PROPERTY_TO_INTEGER("Error happened when parsing value of the property %s to integer"),
+    INFO_PROPERTY_IS_NOT_CONFIGURED("Default property %s is not configured in the properties file and the default %s will be set."),
     ;
 
     private String message;

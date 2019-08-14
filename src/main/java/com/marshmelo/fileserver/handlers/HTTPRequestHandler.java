@@ -1,9 +1,8 @@
-package com.marshmelo.fileserver.handler;
+package com.marshmelo.fileserver.handlers;
 
 import com.marshmelo.fileserver.exceptions.InternalServerException;
 import com.marshmelo.fileserver.exceptions.RequestParsingException;
-import com.marshmelo.fileserver.model.HttpRequest;
-import com.marshmelo.fileserver.utils.HttpRequestParser;
+import com.marshmelo.fileserver.models.HttpRequest;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

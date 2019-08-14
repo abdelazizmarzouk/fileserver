@@ -1,7 +1,8 @@
 package com.marshmelo.fileserver.utils;
 
 import com.marshmelo.fileserver.exceptions.RequestParsingException;
-import com.marshmelo.fileserver.model.HttpRequest;
+import com.marshmelo.fileserver.handlers.HttpRequestParser;
+import com.marshmelo.fileserver.models.HttpRequest;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
