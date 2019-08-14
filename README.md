@@ -78,7 +78,7 @@ The HTTPResponse models the HTTP response so it contains the response status 200
 
 The ResourcesUtil loads a resource from the files system and provides in memory caching for the resource for further calls.
  
-### PropertiesUtil Class
+### ApplicationPropertiesUtil Class
 
 The properties util class loads the application configuration properties.
 
@@ -153,11 +153,10 @@ Below is a table which compare handling **thousand requests** taking into accoun
 |1.32MB|1000|7 Sec|12 Sec|
 
 ### Conclusion
-Thread Pool Size can ne parameterized to give the best performance, it is advisable to take into account the resources available on the server.
-Adding multiple threads which can be blocked by other resources which are not able to fulfill all the request can lead to a very bad performance. 
-An application would not affect other applications when each application is running in its own virtual machine however one should take this into account.
-
-Using cache boosts the performance by factor of seconds when only requesting three resources.
+Thread Pool Size can be parameterized to give the best performance, it is advisable to take into account the resources available on the server.
+Adding multiple threads, which can be blocked by other resources that are not able to fulfill all the request, can lead to a very bad performance. 
+An application would not affect other applications when each application is running in its own virtual machine however it should be taken into account.
+Using cache boosts the performance by factor of seconds when even if only serving three resources.
    
 
 
