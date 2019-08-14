@@ -37,7 +37,25 @@ public class PropertiesUtilTest {
 
         // THEN
         assertEquals(computerName, "marshmelo");
-        assertEquals(poolSize, 1000);
+        assertEquals(poolSize, 50);
+        assertEquals(port, 8000);
+        assertEquals(timeout, 10000);
+    }
+
+    @Test
+    public void testGettingDefaultPropertiesWhenNotAllPropertiesAreProvided() {
+        // GIVEN
+        PropertiesUtil properties = new PropertiesUtil("missing_prop.properties");
+
+        // WHEN
+        String computerName = properties.getComputerDefaultName();
+        int poolSize = properties.getRequestHandlerPoolSize();
+        int port = properties.getServerDefaultPort();
+        int timeout = properties.getSocketConnectionTimeoutInMilliSec();
+
+        // THEN
+        assertEquals(computerName, "marshmelo1");
+        assertEquals(poolSize, 50);
         assertEquals(port, 8000);
         assertEquals(timeout, 10000);
     }

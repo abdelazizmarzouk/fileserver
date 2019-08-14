@@ -1,6 +1,6 @@
 package com.marshmelo.fileserver;
 
-import com.marshmelo.fileserver.handler.HTTPRequestHandler;
+import com.marshmelo.fileserver.handlers.HTTPRequestHandler;
 import com.marshmelo.fileserver.utils.PropertiesUtil;
 import org.apache.log4j.Logger;
 

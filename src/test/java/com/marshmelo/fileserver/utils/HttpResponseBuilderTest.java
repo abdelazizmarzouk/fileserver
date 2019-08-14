@@ -1,7 +1,8 @@
 package com.marshmelo.fileserver.utils;
 
-import com.marshmelo.fileserver.model.HttpResponse;
-import com.marshmelo.fileserver.model.Resource;
+import com.marshmelo.fileserver.handlers.HttpResponseBuilder;
+import com.marshmelo.fileserver.models.HttpResponse;
+import com.marshmelo.fileserver.models.Resource;
 import org.junit.Test;
 
 import java.io.IOException;

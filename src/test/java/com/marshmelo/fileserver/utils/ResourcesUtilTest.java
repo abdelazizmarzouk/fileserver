@@ -1,6 +1,6 @@
 package com.marshmelo.fileserver.utils;
 
-import com.marshmelo.fileserver.model.Resource;
+import com.marshmelo.fileserver.models.Resource;
 import org.junit.Test;
 
 import java.io.IOException;

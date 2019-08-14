@@ -1,4 +1,4 @@
-package com.marshmelo.fileserver.model;
+package com.marshmelo.fileserver.models;
 
 import java.util.Map;
 

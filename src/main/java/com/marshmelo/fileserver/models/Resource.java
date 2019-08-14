@@ -1,4 +1,4 @@
-package com.marshmelo.fileserver.model;
+package com.marshmelo.fileserver.models;
 
 /**
  * A resource model for a file read from the file system and can be used in the resources cache.

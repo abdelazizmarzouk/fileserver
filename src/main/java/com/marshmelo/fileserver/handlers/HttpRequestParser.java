@@ -1,7 +1,7 @@
-package com.marshmelo.fileserver.utils;
+package com.marshmelo.fileserver.handlers;
 
 import com.marshmelo.fileserver.exceptions.RequestParsingException;
-import com.marshmelo.fileserver.model.HttpRequest;
+import com.marshmelo.fileserver.models.HttpRequest;
 
 import java.io.*;
 import java.net.URLDecoder;

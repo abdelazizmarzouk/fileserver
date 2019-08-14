@@ -1,9 +1,9 @@
-package com.marshmelo.fileserver.handler;
+package com.marshmelo.fileserver.handlers;
 
 import com.marshmelo.fileserver.exceptions.InternalServerException;
-import com.marshmelo.fileserver.model.HttpRequest;
-import com.marshmelo.fileserver.model.HttpResponse;
-import com.marshmelo.fileserver.model.Resource;
+import com.marshmelo.fileserver.models.HttpRequest;
+import com.marshmelo.fileserver.models.HttpResponse;
+import com.marshmelo.fileserver.models.Resource;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedOutputStream;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static com.marshmelo.fileserver.messages.LogMessages.ERROR_WRITING_RESPONSE_CONTENT;
 import static com.marshmelo.fileserver.messages.LogMessages.MULTIPLE_ERROR_OCCURRED;
-import static com.marshmelo.fileserver.utils.HttpResponseBuilder.buildResponse;
+import static com.marshmelo.fileserver.handlers.HttpResponseBuilder.buildResponse;
 import static com.marshmelo.fileserver.utils.ResourcesUtil.loadResource;
 
 public abstract class RequestHandler {

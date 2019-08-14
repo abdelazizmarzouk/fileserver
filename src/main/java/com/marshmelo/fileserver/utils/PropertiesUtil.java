@@ -53,26 +53,43 @@ public class PropertiesUtil {
         if (properties == null) {
             return SERVER_DEFAULT_PORT;
         }
+        String portProperty = properties.getProperty(SERVER_DEFAULT_PORT_PROPERTY);
+        if (portProperty == null) {
+            LOGGER.info(LogMessages.INFO_PROPERTY_IS_NOT_CONFIGURED.formatMessage(SERVER_DEFAULT_PORT_PROPERTY, SERVER_DEFAULT_PORT));
+            return SERVER_DEFAULT_PORT;
+        }
         try {
-            return Integer.parseInt(properties.getProperty(SERVER_DEFAULT_PORT_PROPERTY));
+            return Integer.parseInt(portProperty);
         } catch (NumberFormatException e) {
+            LOGGER.warn(LogMessages.ERROR_PARSING_PROPERTY_TO_INTEGER.formatMessage(SERVER_DEFAULT_PORT_PROPERTY));
             return SERVER_DEFAULT_PORT;
         }
     }
 
     public String getComputerDefaultName() {
-        return properties == null ?
-                UNRESOLVED_COMPUTER_NAME_DEFAULT_LABEL :
-                properties.getProperty(UNRESOLVED_COMPUTER_NAME_DEFAULT_LABEL_PROPERTY);
+        if (properties == null) {
+            return UNRESOLVED_COMPUTER_NAME_DEFAULT_LABEL;
+        }
+        String defaultName = properties.getProperty(UNRESOLVED_COMPUTER_NAME_DEFAULT_LABEL_PROPERTY);
+        if (defaultName == null) {
+            LOGGER.info(LogMessages.INFO_PROPERTY_IS_NOT_CONFIGURED.formatMessage(UNRESOLVED_COMPUTER_NAME_DEFAULT_LABEL_PROPERTY, UNRESOLVED_COMPUTER_NAME_DEFAULT_LABEL));
+            return UNRESOLVED_COMPUTER_NAME_DEFAULT_LABEL;
+        }
+        return defaultName;
     }
 
     public int getRequestHandlerPoolSize() {
         if (properties == null) {
             return REQUEST_HANDLER_POOL_SIZE;
         }
+        String poolSize = properties.getProperty(REQUEST_HANDLER_POOL_SIZE_PROPERTY);
+        if (poolSize == null) {
+            LOGGER.info(LogMessages.INFO_PROPERTY_IS_NOT_CONFIGURED.formatMessage(REQUEST_HANDLER_POOL_SIZE_PROPERTY, REQUEST_HANDLER_POOL_SIZE));
+        }
         try {
-            return Integer.parseInt(properties.getProperty(REQUEST_HANDLER_POOL_SIZE_PROPERTY));
+            return Integer.parseInt(poolSize);
         } catch (NumberFormatException e) {
+            LOGGER.warn(LogMessages.ERROR_PARSING_PROPERTY_TO_INTEGER.formatMessage(REQUEST_HANDLER_POOL_SIZE_PROPERTY));
             return REQUEST_HANDLER_POOL_SIZE;
         }
     }
@@ -81,9 +98,15 @@ public class PropertiesUtil {
         if (properties == null) {
             return SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC;
         }
+        String timeout = properties.getProperty(SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC_PROPERTY);
+        if (timeout == null) {
+            LOGGER.info(LogMessages.INFO_PROPERTY_IS_NOT_CONFIGURED.formatMessage(SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC_PROPERTY, SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC));
+            return SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC;
+        }
         try {
-            return Integer.parseInt(properties.getProperty(SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC_PROPERTY));
+            return Integer.parseInt(timeout);
         } catch (NumberFormatException e) {
+            LOGGER.warn(LogMessages.ERROR_PARSING_PROPERTY_TO_INTEGER.formatMessage(SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC_PROPERTY));
             return SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC;
         }
     }

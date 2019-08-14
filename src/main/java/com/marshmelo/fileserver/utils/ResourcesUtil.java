@@ -1,7 +1,7 @@
 package com.marshmelo.fileserver.utils;
 
 import com.marshmelo.fileserver.messages.LogMessages;
-import com.marshmelo.fileserver.model.Resource;
+import com.marshmelo.fileserver.models.Resource;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
@@ -120,7 +120,10 @@ public class ResourcesUtil {
     public static String findMimeType(File file) {
         String extension = FilenameUtils.getExtension(file.getName());
         String mimeType = fileToMimeTypeMap.get(extension);
-        return mimeType == null ? APPLICATION_OCTET_STREAM : mimeType;
-
+        if (mimeType == null) {
+            LOGGER.error(LogMessages.ERROR_FINDING_CONTENT_TYPE.formatMessage(file.getName()));
+            return APPLICATION_OCTET_STREAM;
+        }
+        return mimeType;
     }
 }
