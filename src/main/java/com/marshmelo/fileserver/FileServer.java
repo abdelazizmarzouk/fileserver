@@ -1,7 +1,7 @@
 package com.marshmelo.fileserver;
 
 import com.marshmelo.fileserver.handlers.HTTPRequestHandler;
-import com.marshmelo.fileserver.utils.PropertiesUtil;
+import com.marshmelo.fileserver.utils.ApplicationPropertiesUtil;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class FileServer {
 
     private static final String APPLICATION_PROPERTIES = "application.properties";
     private static final Logger LOGGER = Logger.getLogger(FileServer.class);
-    private static PropertiesUtil properties;
+    private static ApplicationPropertiesUtil properties;
 
     public static void main(String[] args) {
         FileServer starter = new FileServer();
@@ -27,7 +27,7 @@ public class FileServer {
     }
 
     private void startServer() throws IOException {
-        properties = new PropertiesUtil(APPLICATION_PROPERTIES);
+        properties = new ApplicationPropertiesUtil(APPLICATION_PROPERTIES);
         ExecutorService executor = Executors.newFixedThreadPool(properties.getRequestHandlerPoolSize());
         ServerSocket socket;
         int port = properties.getServerDefaultPort();

@@ -13,7 +13,7 @@ import java.util.Properties;
 /**
  * Read properties from application.properties file. If the properties can not be read the default values will be returned.
  */
-public class PropertiesUtil {
+public class ApplicationPropertiesUtil {
 
     private static final int SERVER_DEFAULT_PORT = 8000;
     private static final String SERVER_DEFAULT_PORT_PROPERTY = "file.server.port";
@@ -23,12 +23,11 @@ public class PropertiesUtil {
     private static final String REQUEST_HANDLER_POOL_SIZE_PROPERTY = "file.server.pool.size";
     private static final int SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC = 10000;
     private static final String SOCKET_CONNECTION_TIMEOUT_IN_MILLI_SEC_PROPERTY = "file.server.connection.timeout.milliseconds";
-    private static final Logger LOGGER = Logger.getLogger(PropertiesUtil.class);
+    private static final Logger LOGGER = Logger.getLogger(ApplicationPropertiesUtil.class);
 
     private Properties properties;
 
-
-    public PropertiesUtil(String fileName) {
+    public ApplicationPropertiesUtil(String fileName) {
         URL resource = getClass().getClassLoader().getResource(fileName);
         if (resource != null) {
             String filePath = resource.getFile();

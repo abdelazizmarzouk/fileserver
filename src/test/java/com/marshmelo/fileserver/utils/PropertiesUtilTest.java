@@ -9,7 +9,7 @@ public class PropertiesUtilTest {
     @Test
     public void testGettingPropertiesFromApplicationPropertiesFile() {
         // GIVEN
-        PropertiesUtil properties = new PropertiesUtil("application.properties");
+        ApplicationPropertiesUtil properties = new ApplicationPropertiesUtil("application.properties");
 
         // WHEN
         String computerName = properties.getComputerDefaultName();
@@ -27,7 +27,7 @@ public class PropertiesUtilTest {
     @Test
     public void testGettingDefaultPropertiesWhenPropertiesFileDoesNotExists() {
         // GIVEN
-        PropertiesUtil properties = new PropertiesUtil("not_existing.properties");
+        ApplicationPropertiesUtil properties = new ApplicationPropertiesUtil("not_existing.properties");
 
         // WHEN
         String computerName = properties.getComputerDefaultName();
@@ -45,7 +45,7 @@ public class PropertiesUtilTest {
     @Test
     public void testGettingDefaultPropertiesWhenNotAllPropertiesAreProvided() {
         // GIVEN
-        PropertiesUtil properties = new PropertiesUtil("missing_prop.properties");
+        ApplicationPropertiesUtil properties = new ApplicationPropertiesUtil("missing_prop.properties");
 
         // WHEN
         String computerName = properties.getComputerDefaultName();
