@@ -27,7 +27,6 @@ public enum LogMessages {
     ERROR_HTTP_METHOD_UNSUPPORTED("Unsupported request method."),
     ERROR_HEADER_INCORRECT_FORMAT("Header not correctly formatted."),
     ERROR_HEADER_SHOULD_END_WITH_BLANK_LINE("Header is not ended with a blank line."),
-    ERROR_GETTING_APPLICATION_PROPERTIES("An error occurred while getting application properties, the application will run with the default configurations."),
     ERROR_LOADING_APPLICATION_PROPERTIES("An error occurred while loading application properties, the application will run with the default configurations."),
     ERROR_PARSING_PROPERTY_TO_INTEGER("Error happened when parsing value of the property %s to integer"),
     INFO_PROPERTY_IS_NOT_CONFIGURED("Default property %s is not configured in the properties file and the default %s will be set."),

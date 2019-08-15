@@ -2,13 +2,12 @@ package com.marshmelo.fileserver.utils;
 
 import com.marshmelo.fileserver.messages.LogMessages;
 import com.marshmelo.fileserver.models.Resource;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -63,18 +62,17 @@ public class ResourcesUtil {
         if (resourcePath == null) {
             return null;
         }
-        File file = new File(resourcePath);
-        if (!file.exists()) {
-            return null;
-        }
-        String mimeType = findMimeType(file);
+        int index = resourcePath.lastIndexOf('/');
+        index = index >= 0 ? index + 1 : 0;
+        String mimeType = findMimeType(resourcePath.substring(index));
         byte[] content;
         try {
-            content = readFileAsByteArray(file);
+            content = readFileAsByteArray(resourcePath);
         } catch (IOException e) {
             LOGGER.warn(LogMessages.ERROR_READING_FILE_CONTENT.formatMessage(resourcePath));
             throw e;
         }
+        if (content == null) return null;
         Resource resource = new Resource(content, mimeType);
         resources.put(requestURL, resource);
         return resource;
@@ -91,22 +89,26 @@ public class ResourcesUtil {
         int length = filePath.length();
         filePath = filePath.startsWith("/") ? filePath.substring(1, length) : filePath;
         filePath = STATIC_RESOURCE_FOLDER_PATH + filePath;
-        URL resource = ResourcesUtil.class.getClassLoader().getResource(filePath);
-        return resource == null ? null : resource.getFile();
+        return filePath;
     }
 
     /**
      * Read file content as an array of bytes.
      *
-     * @param file the file to read its content.
+     * @param resourcePath the path to the resource in the resources/static/ folder.
      * @return an array of bytes representing the content of the file.
      * @throws IOException thrown when the content of a given file can not be read.
      */
-    public static byte[] readFileAsByteArray(File file) throws IOException {
+    public static byte[] readFileAsByteArray(String resourcePath) throws IOException {
         try {
-            return FileUtils.readFileToByteArray(file);
+            InputStream inputStream = ResourcesUtil.class.getClassLoader().getResourceAsStream(resourcePath);
+            if (inputStream != null) {
+                return IOUtils.toByteArray(inputStream);
+            } else {
+                return null;
+            }
         } catch (IOException e) {
-            LOGGER.warn(ERROR_READING_FILE.formatMessage(file.getName()));
+            LOGGER.warn(ERROR_READING_FILE.formatMessage(resourcePath));
             throw e;
         }
     }
@@ -114,14 +116,14 @@ public class ResourcesUtil {
     /**
      * Find resource mime type of the file using the file extension.
      *
-     * @param file file to find its content type.
+     * @param fileName the name of the file to find its content type.
      * @return content type e.g. text/html
      */
-    public static String findMimeType(File file) {
-        String extension = FilenameUtils.getExtension(file.getName());
+    public static String findMimeType(String fileName) {
+        String extension = FilenameUtils.getExtension(fileName);
         String mimeType = fileToMimeTypeMap.get(extension);
         if (mimeType == null) {
-            LOGGER.error(LogMessages.ERROR_FINDING_CONTENT_TYPE.formatMessage(file.getName()));
+            LOGGER.error(LogMessages.ERROR_FINDING_CONTENT_TYPE.formatMessage(fileName));
             return APPLICATION_OCTET_STREAM;
         }
         return mimeType;
