@@ -111,7 +111,7 @@ If properties are not provided the default values will be used.
 To get the application up and running run the following commands:
 - gradle clean
 - gradle fatJar
-- Get the generated jar file from build folder and execute it
+- Go to /build/libs
 - Run java -jar fileserver-all-1.0-SNAPSHOT.jar
 
 Please check <a href="https://www.tutorialspoint.com/gradle/index.htm">Gradle</a> tutorial for more information.

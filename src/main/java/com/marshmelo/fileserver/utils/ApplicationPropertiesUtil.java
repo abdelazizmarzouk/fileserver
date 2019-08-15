@@ -3,11 +3,8 @@ package com.marshmelo.fileserver.utils;
 import com.marshmelo.fileserver.messages.LogMessages;
 import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -28,23 +25,15 @@ public class ApplicationPropertiesUtil {
     private Properties properties;
 
     public ApplicationPropertiesUtil(String fileName) {
-        URL resource = getClass().getClassLoader().getResource(fileName);
-        if (resource != null) {
-            String filePath = resource.getFile();
-            InputStream inputStream = null;
-            try {
-                inputStream = new FileInputStream(filePath);
-            } catch (FileNotFoundException e) {
-                LOGGER.info(LogMessages.ERROR_GETTING_APPLICATION_PROPERTIES.formatMessage());
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
+        properties = new Properties();
+        try {
+            if (inputStream != null) {
+                properties.load(inputStream);
             }
-            properties = new Properties();
-            try {
-                if (inputStream != null) {
-                    properties.load(inputStream);
-                }
-            } catch (IOException e) {
-                LOGGER.info(LogMessages.ERROR_LOADING_APPLICATION_PROPERTIES.formatMessage());
-            }
+        } catch (IOException e) {
+            LOGGER.info(LogMessages.ERROR_LOADING_APPLICATION_PROPERTIES.formatMessage());
         }
     }
 
