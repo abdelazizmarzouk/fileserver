@@ -33,7 +33,7 @@ public class GetRequestHandlerTest {
         // Then
         FileInputStream inputStream = new FileInputStream("handler.txt");
         StringWriter writer = new StringWriter();
-        IOUtils.copy(inputStream, writer);
+        IOUtils.copy(inputStream, writer, "UTF-8");
         String response = writer.toString();
         assertTrue(response.contains("HTTP/1.1 200 OK"));
         assertTrue(response.contains("Content-type: text/html"));
@@ -61,7 +61,7 @@ public class GetRequestHandlerTest {
         // Then
         FileInputStream inputStream = new FileInputStream("handler2.txt");
         StringWriter writer = new StringWriter();
-        IOUtils.copy(inputStream, writer);
+        IOUtils.copy(inputStream, writer, "UTF-8");
         String response = writer.toString();
         assertTrue(response.contains("HTTP/1.1 404 Not Found"));
         assertTrue(response.contains("Content-type: text/html"));
