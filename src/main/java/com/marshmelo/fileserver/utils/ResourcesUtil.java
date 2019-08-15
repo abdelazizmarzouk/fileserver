@@ -59,12 +59,8 @@ public class ResourcesUtil {
             return resources.get(requestURL);
         }
         String resourcePath = buildResourcePath(requestURL);
-        if (resourcePath == null) {
-            return null;
-        }
         int index = resourcePath.lastIndexOf('/');
         index = index >= 0 ? index + 1 : 0;
-        String mimeType = findMimeType(resourcePath.substring(index));
         byte[] content;
         try {
             content = readFileAsByteArray(resourcePath);
@@ -73,6 +69,7 @@ public class ResourcesUtil {
             throw e;
         }
         if (content == null) return null;
+        String mimeType = findMimeType(resourcePath.substring(index));
         Resource resource = new Resource(content, mimeType);
         resources.put(requestURL, resource);
         return resource;
