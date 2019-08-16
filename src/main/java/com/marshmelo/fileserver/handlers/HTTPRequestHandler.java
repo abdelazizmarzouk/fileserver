@@ -38,7 +38,7 @@ public class HTTPRequestHandler implements Runnable {
             handleRequest();
             LOGGER.debug(REQUEST_HANDLING_FINISHED.formatMessage());
         } catch (InternalServerException | RequestParsingException | IOException | IllegalArgumentException e) {
-            LOGGER.error(e);
+            LOGGER.warn(e);
             closeSocket();
         }
     }

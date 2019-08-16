@@ -19,7 +19,6 @@ public enum LogMessages {
     ERROR_PARSING_HTTP_REQUEST("Error occurred while parsing http request header."),
     ERROR_IN_HTTP_REQUEST_HEADER_FORMAT("The request header is not correctly formatted."),
     ERROR_IN_HTTP_REQUEST_URL_ENCODING("The request URL contains not allowed characters."),
-    ERROR_READING_FILE_CONTENT("Unable to read contents of the file with path %s."),
     ERROR_WRITING_RESPONSE_CONTENT("Unable to write contents to the response."),
     ERROR_INITIAL_HEADER_LINE("Initial line of HTTP request does not follow the correct format."),
     ERROR_ARGUMENTS_IN_FIRST_LINE_OF_REQUEST_SHOULD_BE_THREE("First line of HTTP request does not have 3 arguments."),

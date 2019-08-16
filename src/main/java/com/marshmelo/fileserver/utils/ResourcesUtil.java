@@ -59,18 +59,11 @@ public class ResourcesUtil {
             return resources.get(requestURL);
         }
         String resourcePath = buildResourcePath(requestURL);
-        int index = resourcePath.lastIndexOf('/');
-        index = index >= 0 ? index + 1 : 0;
-        byte[] content;
-        try {
-            content = readFileAsByteArray(resourcePath);
-        } catch (IOException e) {
-            LOGGER.warn(LogMessages.ERROR_READING_FILE_CONTENT.formatMessage(resourcePath));
-            throw e;
+        byte[] content = readFileAsByteArray(resourcePath);
+        if (content == null) {
+            return null;
         }
-        if (content == null) return null;
-        String mimeType = findMimeType(resourcePath.substring(index));
-        Resource resource = new Resource(content, mimeType);
+        Resource resource = new Resource(content, findMimeType(resourcePath));
         resources.put(requestURL, resource);
         return resource;
     }
@@ -111,12 +104,16 @@ public class ResourcesUtil {
     }
 
     /**
-     * Find resource mime type of the file using the file extension.
+     * Find resource mime type of the resource path using the file extension, if the extension is not mapped the default mime type
+     * "application/octet-stream" will be returned.
      *
-     * @param fileName the name of the file to find its content type.
+     * @param resourcePath the complete path of the resource on he server.
      * @return content type e.g. text/html
      */
-    public static String findMimeType(String fileName) {
+    public static String findMimeType(String resourcePath) {
+        int index = resourcePath.lastIndexOf('/');
+        index = index >= 0 ? index + 1 : 0;
+        String fileName = resourcePath.substring(index);
         String extension = FilenameUtils.getExtension(fileName);
         String mimeType = fileToMimeTypeMap.get(extension);
         if (mimeType == null) {
