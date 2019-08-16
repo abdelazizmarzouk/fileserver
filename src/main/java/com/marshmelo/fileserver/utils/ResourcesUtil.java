@@ -120,7 +120,7 @@ public class ResourcesUtil {
         String extension = FilenameUtils.getExtension(fileName);
         String mimeType = fileToMimeTypeMap.get(extension);
         if (mimeType == null) {
-            LOGGER.error(LogMessages.ERROR_FINDING_CONTENT_TYPE.formatMessage(fileName));
+            LOGGER.warn(LogMessages.ERROR_FINDING_CONTENT_TYPE.formatMessage(fileName));
             return APPLICATION_OCTET_STREAM;
         }
         return mimeType;
