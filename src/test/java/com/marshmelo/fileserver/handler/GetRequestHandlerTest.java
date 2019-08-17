@@ -70,4 +70,25 @@ public class GetRequestHandlerTest {
         assertTrue(response.contains("<h1>404 - Page not found!</h1>"));
     }
 
+    // Not allowed argument added after the & sign in the URL
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRequestHandlerURLWithNonAllowedArgument() throws IOException, InternalServerException, RequestParsingException {
+        // Given
+        OutputStream outputStream = new FileOutputStream("handler2.txt");
+        GetRequestHandler handler = new GetRequestHandler(outputStream);
+        String request =
+                "GET /index1.html?param=ttt&% HTTP/1.1\n" +
+                        "Host: www.marshmelo.com\n" +
+                        "Accept: image/gif, image/jpeg, */*\n" +
+                        "Accept-Language: en-us\n" +
+                        "Accept-Encoding: gzip, deflate\n" +
+                        "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)\n" +
+                        "\n";
+        // When
+        HttpRequest httpRequest = HttpRequestParser.parseRequest(new ByteArrayInputStream(request.getBytes()));
+        handler.handleRequest(httpRequest);
+        // Then
+        // Exception is thrown
+    }
+
 }
