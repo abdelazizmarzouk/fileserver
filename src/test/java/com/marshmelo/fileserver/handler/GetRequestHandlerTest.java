@@ -91,4 +91,31 @@ public class GetRequestHandlerTest {
         // Exception is thrown
     }
 
+    @Test
+    public void testGetRequestHandlerForJPGFile() throws IOException, InternalServerException, RequestParsingException {
+        // Given
+        OutputStream outputStream = new FileOutputStream("handler.txt");
+        GetRequestHandler handler = new GetRequestHandler(outputStream);
+        String request =
+                "GET /marshmelo.jpg HTTP/1.1\n" +
+                        "Host: www.marshmelo.com\n" +
+                        "Accept: image/gif, image/jpeg, */*\n" +
+                        "Accept-Language: en-us\n" +
+                        "Accept-Encoding: gzip, deflate\n" +
+                        "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)\n" +
+                        "\n";
+        // When
+        HttpRequest httpRequest = HttpRequestParser.parseRequest(new ByteArrayInputStream(request.getBytes()));
+        handler.handleRequest(httpRequest);
+        // Then
+        FileInputStream inputStream = new FileInputStream("handler.txt");
+        StringWriter writer = new StringWriter();
+        IOUtils.copy(inputStream, writer, "UTF-8");
+        String response = writer.toString();
+        assertTrue(response.contains("HTTP/1.1 200 OK"));
+        assertTrue(response.contains("Content-type: image/jpeg"));
+        assertTrue(response.contains("Server: Marshmelo Http Server"));
+        assertTrue(response.contains("Content-length: 218006"));
+    }
+
 }
